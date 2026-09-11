@@ -7,6 +7,61 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
+<style>
+  .product-details {
+    display: grid;
+    gap: 0.7rem;
+    margin-top: 1.25rem;
+    padding: 1rem;
+    border: 1px solid rgba(18, 91, 132, 0.12);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.72);
+  }
+
+  .product-detail-row,
+  .ideal-for {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    color: #527080;
+    font-size: 0.82rem;
+  }
+
+  .product-detail-row strong {
+    margin-left: auto;
+    color: #155b83;
+    font-weight: 700;
+  }
+
+  .detail-icon {
+    flex: 0 0 21px;
+    width: 21px;
+    height: 21px;
+    fill: none;
+    stroke: #1b8cc2;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .ideal-for {
+    align-items: flex-start;
+    margin-top: 0.25rem;
+    padding-top: 0.8rem;
+    border-top: 1px solid rgba(18, 91, 132, 0.1);
+    line-height: 1.5;
+  }
+
+  .ideal-for strong {
+    color: #155b83;
+  }
+
+  @media (max-width: 480px) {
+    .product-details { padding: 0.85rem; }
+    .product-detail-row,
+    .ideal-for { font-size: 0.76rem; }
+  }
+</style>
 
 </head>
 <body>
@@ -18,9 +73,9 @@
       <img src="images/logo.png" alt="RIVR logo">
     </a>
     <nav class="nav-links" id="navLinks">
-      <a href="index.html" class="nav-link active">Home</a>
+      <a href="index.html" class="nav-link">Home</a>
       <a href="about-us.html" class="nav-link">About</a>
-      <a href="products.html" class="nav-link">Products</a>
+      <a href="products.html" class="nav-link active">Products</a>
       <a href="why-rivr.html" class="nav-link">Why Rivr</a>
       <a href="blogs.html" class="nav-link">Blogs</a>
     </nav>
@@ -34,7 +89,7 @@
 </header>
 
 
-
+<!-- 
 <section class="about-hero">
   <div class="container about-hero-inner">
     <div class="reveal" data-reveal="left">
@@ -58,10 +113,11 @@
           <img src="images/about-photo.png" alt="RIVR water bottle">
     </div>
   </div>
-</section>
-
+</section> -->
 <!-- ===== PRODUCTS ===== -->
 <section class="products" id="products">
+  <canvas class="ripple-layer" id="productsRipple"></canvas>
+
   <div class="container">
     <div class="section-head reveal" data-reveal="up">
       <h2>Our Products</h2>
@@ -69,32 +125,261 @@
     </div>
 
     <div class="product-grid">
-      <div class="product-card reveal" data-reveal="up" data-delay="0">
-        <div class="product-image"><img src="images/bottle1-1.png" alt="RIVR 250ml bottle"></div>
+      <div class="product-card reveal" data-reveal="up" data-delay="120">
+        <div class="product-slider">
+          <div class="product-slides">
+            <div class="product-slide active">
+              <img src="images/size-12.png" alt="RIVR 250ml bottle">
+            </div>
+            <div class="product-slide">
+              <img src="images/size-13.jpg" alt="RIVR 250ml outdoor">
+            </div>
+            <div class="product-slide">
+              <img src="images/size-11.jpg" alt="RIVR 250ml lifestyle">
+            </div>
+          </div>
+          <!-- Previous Arrow -->
+          <button class="slider-arrow prev-arrow" aria-label="Previous image">
+            &#10094;
+          </button>
+          <!-- Next Arrow -->
+          <button class="slider-arrow next-arrow" aria-label="Next image">
+            &#10095;
+          </button>
+          <!-- Slider Dots -->
+          <div class="slider-dots">
+            <button class="slider-dot active" data-slide="0"></button>
+            <button class="slider-dot" data-slide="1"></button>
+            <button class="slider-dot" data-slide="2"></button>
+          </div>
+        </div>
         <h3>RIVR 250ml</h3>
         <p>Alkaline Water pH 8+</p>
-        <button class="btn btn-primary btn-block">View Details</button>
+        <div class="product-details" aria-label="RIVR 250ml product details">
+          <div class="product-detail-row">
+            <svg class="detail-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m4 7 8-4 8 4v10l-8 4-8-4V7Z"/><path d="m4 7 8 4 8-4M12 11v10"/></svg>
+            <span>Pack Size</span><strong>Pack of 24</strong>
+          </div>
+          <div class="product-detail-row">
+            <svg class="detail-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c-2.5 4-6 8-6 12a6 6 0 0 0 12 0c0-4-3.5-8-6-12Z"/></svg>
+            <span>pH Level</span><strong>8+</strong>
+          </div>
+          <div class="product-detail-row">
+            <svg class="detail-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8c3-4 6 4 9 0s6 4 9 0M3 13c3-4 6 4 9 0s6 4 9 0M3 18c3-4 6 4 9 0s6 4 9 0"/></svg>
+            <span>Alkaline Water</span><strong aria-label="Included">&#10003;</strong>
+          </div>
+          <div class="product-detail-row">
+            <svg class="detail-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 7 4-2 9-5 5-5-5-2-9 7-4Z"/><path d="m9 13 6-6M10 7l5 5"/></svg>
+            <span>Essential Minerals</span><strong aria-label="Included">&#10003;</strong>
+          </div>
+          <div class="product-detail-row">
+            <svg class="detail-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20c8 1 14-5 15-14-9-1-15 5-15 14Z"/><path d="M4 20c2-4 5-7 9-9"/></svg>
+            <span>BPA Free Bottle</span><strong aria-label="Included">&#10003;</strong>
+          </div>
+          <div class="ideal-for">
+            <svg class="detail-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M8 8V6a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18M10 12v3h4v-3"/></svg>
+            <span><strong>Ideal For</strong><br>Travel, Pocket, On-the-go</span>
+          </div>
+        </div>
       </div>
 
       <div class="product-card reveal" data-reveal="up" data-delay="120">
-        <div class="product-image"><img src="images/bottle1.png" alt="RIVR 500ml bottle"></div>
+        <div class="product-slider">
+          <div class="product-slides">
+            <div class="product-slide active">
+              <img src="images/size-21.png" alt="RIVR 250ml bottle">
+            </div>
+            <div class="product-slide">
+              <img src="images/size-22.png" alt="RIVR 250ml outdoor">
+            </div>
+            <div class="product-slide">
+              <img src="images/size-23.png" alt="RIVR 250ml lifestyle">
+            </div>
+          </div>
+          <!-- Previous Arrow -->
+          <button class="slider-arrow prev-arrow" aria-label="Previous image">
+            &#10094;
+          </button>
+          <!-- Next Arrow -->
+          <button class="slider-arrow next-arrow" aria-label="Next image">
+            &#10095;
+          </button>
+          <!-- Slider Dots -->
+          <div class="slider-dots">
+            <button class="slider-dot active" data-slide="0"></button>
+            <button class="slider-dot" data-slide="1"></button>
+            <button class="slider-dot" data-slide="2"></button>
+          </div>
+        </div>
         <h3>RIVR 500ml</h3>
         <p>Alkaline Water pH 8+</p>
-        <button class="btn btn-primary btn-block">View Details</button>
+        <div class="product-details" aria-label="RIVR 250ml product details">
+          <div class="product-detail-row">
+            <svg class="detail-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m4 7 8-4 8 4v10l-8 4-8-4V7Z"/><path d="m4 7 8 4 8-4M12 11v10"/></svg>
+            <span>Pack Size</span><strong>Pack of 24</strong>
+          </div>
+          <div class="product-detail-row">
+            <svg class="detail-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c-2.5 4-6 8-6 12a6 6 0 0 0 12 0c0-4-3.5-8-6-12Z"/></svg>
+            <span>pH Level</span><strong>8+</strong>
+          </div>
+          <div class="product-detail-row">
+            <svg class="detail-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8c3-4 6 4 9 0s6 4 9 0M3 13c3-4 6 4 9 0s6 4 9 0M3 18c3-4 6 4 9 0s6 4 9 0"/></svg>
+            <span>Alkaline Water</span><strong aria-label="Included">&#10003;</strong>
+          </div>
+          <div class="product-detail-row">
+            <svg class="detail-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 7 4-2 9-5 5-5-5-2-9 7-4Z"/><path d="m9 13 6-6M10 7l5 5"/></svg>
+            <span>Essential Minerals</span><strong aria-label="Included">&#10003;</strong>
+          </div>
+          <div class="product-detail-row">
+            <svg class="detail-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20c8 1 14-5 15-14-9-1-15 5-15 14Z"/><path d="M4 20c2-4 5-7 9-9"/></svg>
+            <span>BPA Free Bottle</span><strong aria-label="Included">&#10003;</strong>
+          </div>
+          <div class="ideal-for">
+            <svg class="detail-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M8 8V6a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18M10 12v3h4v-3"/></svg>
+            <span><strong>Ideal For</strong><br>Daily use, Work, Fitness</span>
+          </div>
+        </div>
       </div>
 
-      <div class="product-card reveal" data-reveal="up" data-delay="240">
-        <div class="product-image"><img src="images/bottle1.png" alt="RIVR 1000ml bottle"></div>
+      <div class="product-card reveal" data-reveal="up" data-delay="120">
+        <div class="product-slider">
+          <div class="product-slides">
+            <div class="product-slide active">
+              <img src="images/size-31.png" alt="RIVR 250ml bottle">
+            </div>
+            <div class="product-slide">
+              <img src="images/size-32.png" alt="RIVR 250ml outdoor">
+            </div>
+            <div class="product-slide">
+              <img src="images/size-33.png" alt="RIVR 250ml lifestyle">
+            </div>
+          </div>
+          <!-- Previous Arrow -->
+          <button class="slider-arrow prev-arrow" aria-label="Previous image">
+            &#10094;
+          </button>
+          <!-- Next Arrow -->
+          <button class="slider-arrow next-arrow" aria-label="Next image">
+            &#10095;
+          </button>
+          <!-- Slider Dots -->
+          <div class="slider-dots">
+            <button class="slider-dot active" data-slide="0"></button>
+            <button class="slider-dot" data-slide="1"></button>
+            <button class="slider-dot" data-slide="2"></button>
+          </div>
+        </div>
         <h3>RIVR 1000ml</h3>
         <p>Alkaline Water pH 8+</p>
-        <button class="btn btn-primary btn-block">View Details</button>
+        <div class="product-details" aria-label="RIVR 250ml product details">
+          <div class="product-detail-row">
+            <svg class="detail-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m4 7 8-4 8 4v10l-8 4-8-4V7Z"/><path d="m4 7 8 4 8-4M12 11v10"/></svg>
+            <span>Pack Size</span><strong>Pack of 24</strong>
+          </div>
+          <div class="product-detail-row">
+            <svg class="detail-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c-2.5 4-6 8-6 12a6 6 0 0 0 12 0c0-4-3.5-8-6-12Z"/></svg>
+            <span>pH Level</span><strong>8+</strong>
+          </div>
+          <div class="product-detail-row">
+            <svg class="detail-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8c3-4 6 4 9 0s6 4 9 0M3 13c3-4 6 4 9 0s6 4 9 0M3 18c3-4 6 4 9 0s6 4 9 0"/></svg>
+            <span>Alkaline Water</span><strong aria-label="Included">&#10003;</strong>
+          </div>
+          <div class="product-detail-row">
+            <svg class="detail-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 7 4-2 9-5 5-5-5-2-9 7-4Z"/><path d="m9 13 6-6M10 7l5 5"/></svg>
+            <span>Essential Minerals</span><strong aria-label="Included">&#10003;</strong>
+          </div>
+          <div class="product-detail-row">
+            <svg class="detail-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20c8 1 14-5 15-14-9-1-15 5-15 14Z"/><path d="M4 20c2-4 5-7 9-9"/></svg>
+            <span>BPA Free Bottle</span><strong aria-label="Included">&#10003;</strong>
+          </div>
+          <div class="ideal-for">
+            <svg class="detail-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M8 8V6a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18M10 12v3h4v-3"/></svg>
+            <span><strong>Ideal For</strong><br>Home, Gym, Long Workouts</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const sliders = document.querySelectorAll(".product-slider");
+    sliders.forEach(function (slider) {
+        const slides = slider.querySelectorAll(".product-slide");
+        const dots = slider.querySelectorAll(".slider-dot");
+        const prevButton = slider.querySelector(".prev-arrow");
+        const nextButton = slider.querySelector(".next-arrow");
+        let currentIndex = 0;
+        let autoPlay;
+        function showSlide(index) {
+            //Loop to first image
+            if (index >= slides.length) {
+                index = 0;
+            }
+            // Loop to last image
+            if (index < 0) {
+                index = slides.length - 1;
+            }
+            // Remove active from all slides
+            slides.forEach(function (slide) {
+                slide.classList.remove("active");
+            });
+            // Remove active from all dots
+            dots.forEach(function (dot) {
+                dot.classList.remove("active");
+            });
+            // Activate current slide
+            slides[index].classList.add("active");
+            // Activate current dot
+            if (dots[index]) {
+                dots[index].classList.add("active");
+            }
+            // Update current index
+            currentIndex = index;
+        }
+        nextButton.addEventListener("click", function () {
+            showSlide(currentIndex + 1);
+            restartAutoPlay();
+        });
+        prevButton.addEventListener("click", function () {
+            showSlide(currentIndex - 1);
+            restartAutoPlay();
+        });
+        dots.forEach(function (dot, index) {
+            dot.addEventListener("click", function () {
+                showSlide(index);
+                restartAutoPlay();
+            });
+        });
+        function startAutoPlay() {
+            autoPlay = setInterval(function () {
+                showSlide(currentIndex + 1);
+            }, 3000);
+        }
+        function restartAutoPlay() {
+            clearInterval(autoPlay);
+            startAutoPlay();
+        }
+        showSlide(0);
+        startAutoPlay();
+    });
 
+});
 
-<section class="fit">
+</script>
+<script src="water-ripple.js"></script>
+<script>
+  window.addEventListener('load', function () {
+    WaterRipple.init({
+      sectionId: 'products',
+      canvasId: 'productsRipple',
+      image: 'images/water-bg.jpg',
+      excludeSelector: '.product-card'
+    });
+  });
+</script>
+
+<!-- <section class="fit">
   <div class="container">
     <div class="fit-card reveal" data-reveal="up">
       <h2>Find Your Perfect Fit</h2>
@@ -118,7 +403,7 @@
       </table>
     </div>
   </div>
-</section>
+</section> -->
 
 <!-- ===== CTA ===== -->
 <section class="cta">
@@ -139,15 +424,9 @@
       <img src="images/logo-white.png" alt="RIVR logo">
       <p>Purely Alkaline.<br>Perfectly Balanced.</p>
       <div class="social-icons">
-        <a href="https://www.facebook.com/RIVR" aria-label="Facebook">
-          <svg viewBox="0 0 24 24"><path d="M14 9h3V6h-3c-2 0-3.5 1.5-3.5 3.5V11H8v3h2.5v7h3v-7H16l.5-3h-3V9.5c0-.3.2-.5.5-.5Z"/></svg>
-        </a>
-        <a href="https://www.instagram.com/RIVR" aria-label="Instagram">
-          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
-        </a>
-        <a href="https://www.twitter.com/RIVR" aria-label="Twitter">
-          <svg viewBox="0 0 24 24"><path d="M22 5.9c-.7.3-1.5.6-2.3.7.8-.5 1.5-1.3 1.8-2.3-.8.5-1.7.8-2.6 1a4 4 0 0 0-6.9 3.6A11.5 11.5 0 0 1 3.7 4.6a4 4 0 0 0 1.2 5.4c-.6 0-1.2-.2-1.7-.5v.1a4 4 0 0 0 3.2 4 4 4 0 0 1-1.8.1 4 4 0 0 0 3.8 2.8A8 8 0 0 1 2 18.6a11.4 11.4 0 0 0 6.3 1.9c7.5 0 11.7-6.4 11.7-11.9v-.5c.8-.6 1.5-1.3 2-2.2Z"/></svg>
-        </a>
+        <a href="#" class="social-icon" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.2c2.7 0 3 0 4.1.06 1.1.05 1.8.22 2.4.46.6.24 1.1.56 1.6 1.06.5.5.82 1 1.06 1.6.24.6.4 1.3.46 2.4.06 1.1.06 1.4.06 4.1s0 3-.06 4.1c-.05 1.1-.22 1.8-.46 2.4a4.3 4.3 0 0 1-1.06 1.6 4.3 4.3 0 0 1-1.6 1.06c-.6.24-1.3.4-2.4.46-1.1.06-1.4.06-4.1.06s-3 0-4.1-.06c-1.1-.05-1.8-.22-2.4-.46a4.3 4.3 0 0 1-1.6-1.06 4.3 4.3 0 0 1-1.06-1.6c-.24-.6-.4-1.3-.46-2.4C2.2 15 2.2 14.7 2.2 12s0-3 .06-4.1c.05-1.1.22-1.8.46-2.4.24-.6.56-1.1 1.06-1.6a4.3 4.3 0 0 1 1.6-1.06c.6-.24 1.3-.4 2.4-.46C9 2.2 9.3 2.2 12 2.2zm0 1.8c-2.65 0-2.96 0-4 .06-.96.04-1.48.2-1.83.34-.46.18-.79.4-1.13.75-.35.34-.57.67-.75 1.13-.14.35-.3.87-.34 1.83-.05 1.04-.06 1.35-.06 4s0 2.96.06 4c.04.96.2 1.48.34 1.83.18.46.4.79.75 1.13.34.35.67.57 1.13.75.35.14.87.3 1.83.34 1.04.05 1.35.06 4 .06s2.96 0 4-.06c.96-.04 1.48-.2 1.83-.34.46-.18.79-.4 1.13-.75.35-.34.57-.67.75-1.13.14-.35.3-.87.34-1.83.05-1.04.06-1.35.06-4s0-2.96-.06-4c-.04-.96-.2-1.48-.34-1.83a2.9 2.9 0 0 0-.75-1.13 2.9 2.9 0 0 0-1.13-.75c-.35-.14-.87-.3-1.83-.34-1.04-.05-1.35-.06-4-.06zm0 3.5a4.5 4.5 0 1 1 0 9 4.5 4.5 0 0 1 0-9zm0 1.8a2.7 2.7 0 1 0 0 5.4 2.7 2.7 0 0 0 0-5.4zm5.7-2a1.05 1.05 0 1 1-2.1 0 1.05 1.05 0 0 1 2.1 0z"/></svg></a>
+        <a href="#" class="social-icon" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1V8c0-.9.25-1.5 1.55-1.5H17V3.7C16.6 3.65 15.4 3.5 14 3.5c-2.7 0-4.6 1.65-4.6 4.7v2.7H6.7V14H9.4v8h4.1z"/></svg></a>
+        <a href="#" class="social-icon" aria-label="Youtube"><svg viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4z"/></svg></a>
       </div>
     </div>
 
@@ -177,13 +456,15 @@
   </div>
 
   <div class="footer-bottom">
-    <p>&copy; <span id="year"></span> RIVR. All rights reserved.</p>
+    <p>&copy; <span id="year"></span> RIVR. All rights reserved. and developed by thinkB.</p>
   </div>
 </footer>
 
 <button id="backToTop" aria-label="Back to top">&#8593;</button>
 
 <script src="js/script.js"></script>
+<script src="js/water-ripple.js"></script>
+
 
 </body>
 </html>

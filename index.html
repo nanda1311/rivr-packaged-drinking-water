@@ -7,6 +7,34 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
+<style>
+  .hero {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .hero-video {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(90deg, rgba(0, 0, 0, .58), rgba(0, 0, 0, .18));
+  }
+
+  .hero-copy {
+    color: #fff;
+  }
+</style>
 
 </head>
 <body>
@@ -30,11 +58,13 @@
       <span></span><span></span><span></span>
     </button>
   </div>
-</header>
+</header>   
 <!-- ===== HERO ===== -->
 <section class="hero" id="home">
-  <canvas class="hero-ripple" id="heroRipple"></canvas>
-
+  <video class="hero-video" autoplay muted loop playsinline aria-hidden="true" poster="images/hero-bg.jpg">
+    <source src="images/vid-bg-1.mp4" type="video/mp4">
+    Your browser does not support background video.
+  </video>
   <div class="container hero-inner">
     <div class="hero-copy reveal" data-reveal="left">
       <h1>Purely Alkaline.<br>Perfectly Balanced.</h1>
@@ -52,7 +82,7 @@
   
   <div class="container about-inner">
     <div class="about-media reveal" data-reveal="left">
-      <img src="images/about-photo.png" alt="Holding RIVR bottle by the river">
+      <img src="images/about.jpeg" alt="Holding RIVR bottle by the river">
     </div>
 
     <div class="about-copy reveal" data-reveal="right">
@@ -90,9 +120,10 @@
     </div>
   </div>
 </section>
-
 <!-- ===== PRODUCTS ===== -->
 <section class="products" id="products">
+  <canvas class="ripple-layer" id="productsRipple"></canvas>
+
   <div class="container">
     <div class="section-head reveal" data-reveal="up">
       <h2>Our Products</h2>
@@ -100,29 +131,190 @@
     </div>
 
     <div class="product-grid">
-      <div class="product-card reveal" data-reveal="up" data-delay="0">
-        <div class="product-image"><img src="images/bottle1.png" alt="RIVR 250ml bottle"></div>
+      <div class="product-card reveal" data-reveal="up" data-delay="120">
+        <div class="product-slider">
+          <div class="product-slides">
+            <div class="product-slide active">
+              <img src="images/size-12.png" alt="RIVR 250ml bottle">
+            </div>
+            <div class="product-slide">
+              <img src="images/size-13.jpg" alt="RIVR 250ml outdoor">
+            </div>
+            <div class="product-slide">
+              <img src="images/size-11.jpg" alt="RIVR 250ml lifestyle">
+            </div>
+          </div>
+          <!-- Previous Arrow -->
+          <button class="slider-arrow prev-arrow" aria-label="Previous image">
+            &#10094;
+          </button>
+          <!-- Next Arrow -->
+          <button class="slider-arrow next-arrow" aria-label="Next image">
+            &#10095;
+          </button>
+          <!-- Slider Dots -->
+          <div class="slider-dots">
+            <button class="slider-dot active" data-slide="0"></button>
+            <button class="slider-dot" data-slide="1"></button>
+            <button class="slider-dot" data-slide="2"></button>
+          </div>
+        </div>
         <h3>RIVR 250ml</h3>
         <p>Alkaline Water pH 8+</p>
-        <button class="btn btn-primary btn-block">View Details</button>
+        <a href="products.html" class="btn btn-primary btn-block">
+          View Details
+        </a>
       </div>
 
       <div class="product-card reveal" data-reveal="up" data-delay="120">
-        <div class="product-image"><img src="images/bottle1.png" alt="RIVR 500ml bottle"></div>
+        <div class="product-slider">
+          <div class="product-slides">
+            <div class="product-slide active">
+              <img src="images/size-21.png" alt="RIVR 250ml bottle">
+            </div>
+            <div class="product-slide">
+              <img src="images/size-22.png" alt="RIVR 250ml outdoor">
+            </div>
+            <div class="product-slide">
+              <img src="images/size-23.png" alt="RIVR 250ml lifestyle">
+            </div>
+          </div>
+          <!-- Previous Arrow -->
+          <button class="slider-arrow prev-arrow" aria-label="Previous image">
+            &#10094;
+          </button>
+          <!-- Next Arrow -->
+          <button class="slider-arrow next-arrow" aria-label="Next image">
+            &#10095;
+          </button>
+          <!-- Slider Dots -->
+          <div class="slider-dots">
+            <button class="slider-dot active" data-slide="0"></button>
+            <button class="slider-dot" data-slide="1"></button>
+            <button class="slider-dot" data-slide="2"></button>
+          </div>
+        </div>
         <h3>RIVR 500ml</h3>
         <p>Alkaline Water pH 8+</p>
-        <button class="btn btn-primary btn-block">View Details</button>
+        <a href="products.html" class="btn btn-primary btn-block">
+          View Details
+        </a>
       </div>
 
-      <div class="product-card reveal" data-reveal="up" data-delay="240">
-        <div class="product-image"><img src="images/bottle1.png" alt="RIVR 1000ml bottle"></div>
+      <div class="product-card reveal" data-reveal="up" data-delay="120">
+        <div class="product-slider">
+          <div class="product-slides">
+            <div class="product-slide active">
+              <img src="images/size-31.png" alt="RIVR 250ml bottle">
+            </div>
+            <div class="product-slide">
+              <img src="images/size-32.png" alt="RIVR 250ml outdoor">
+            </div>
+            <div class="product-slide">
+              <img src="images/size-33.png" alt="RIVR 250ml lifestyle">
+            </div>
+          </div>
+          <!-- Previous Arrow -->
+          <button class="slider-arrow prev-arrow" aria-label="Previous image">
+            &#10094;
+          </button>
+          <!-- Next Arrow -->
+          <button class="slider-arrow next-arrow" aria-label="Next image">
+            &#10095;
+          </button>
+          <!-- Slider Dots -->
+          <div class="slider-dots">
+            <button class="slider-dot active" data-slide="0"></button>
+            <button class="slider-dot" data-slide="1"></button>
+            <button class="slider-dot" data-slide="2"></button>
+          </div>
+        </div>
         <h3>RIVR 1000ml</h3>
         <p>Alkaline Water pH 8+</p>
-        <button class="btn btn-primary btn-block">View Details</button>
+        <a href="products.html" class="btn btn-primary btn-block">
+          View Details
+        </a>
       </div>
     </div>
   </div>
 </section>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const sliders = document.querySelectorAll(".product-slider");
+    sliders.forEach(function (slider) {
+        const slides = slider.querySelectorAll(".product-slide");
+        const dots = slider.querySelectorAll(".slider-dot");
+        const prevButton = slider.querySelector(".prev-arrow");
+        const nextButton = slider.querySelector(".next-arrow");
+        let currentIndex = 0;
+        let autoPlay;
+        function showSlide(index) {
+            //Loop to first image
+            if (index >= slides.length) {
+                index = 0;
+            }
+            // Loop to last image
+            if (index < 0) {
+                index = slides.length - 1;
+            }
+            // Remove active from all slides
+            slides.forEach(function (slide) {
+                slide.classList.remove("active");
+            });
+            // Remove active from all dots
+            dots.forEach(function (dot) {
+                dot.classList.remove("active");
+            });
+            // Activate current slide
+            slides[index].classList.add("active");
+            // Activate current dot
+            if (dots[index]) {
+                dots[index].classList.add("active");
+            }
+            // Update current index
+            currentIndex = index;
+        }
+        nextButton.addEventListener("click", function () {
+            showSlide(currentIndex + 1);
+            restartAutoPlay();
+        });
+        prevButton.addEventListener("click", function () {
+            showSlide(currentIndex - 1);
+            restartAutoPlay();
+        });
+        dots.forEach(function (dot, index) {
+            dot.addEventListener("click", function () {
+                showSlide(index);
+                restartAutoPlay();
+            });
+        });
+        function startAutoPlay() {
+            autoPlay = setInterval(function () {
+                showSlide(currentIndex + 1);
+            }, 3000);
+        }
+        function restartAutoPlay() {
+            clearInterval(autoPlay);
+            startAutoPlay();
+        }
+        showSlide(0);
+        startAutoPlay();
+    });
+
+});
+
+</script>
+<script src="water-ripple.js"></script>
+<script>
+  window.addEventListener('load', function () {
+    WaterRipple.init({
+      sectionId: 'products',
+      canvasId: 'productsRipple',
+      image: 'images/water-bg.jpg',
+      excludeSelector: '.product-card'
+    });
+  });
+</script>
 
 <!-- ===== WHY RIVR ===== -->
 <section class="why" id="why">
@@ -143,7 +335,7 @@
 
       <div class="why-card reveal" data-reveal="up" data-delay="120">
         <span class="icon-square">
-          <svg viewBox="0 0 24 24"><path d="M12 21s-6-3.6-6-9a4 4 0 0 1 6-3.5A4 4 0 0 1 18 12c0 5.4-6 9-6 9Z"/><path d="M12 8V3"/></svg>
+          <img src="images/nutrients.png" alt="Essential Minerals">
         </span>
         <h3>Essential Minerals</h3>
         <p>Enriched with essential minerals for daily balance.</p>
@@ -151,7 +343,7 @@
 
       <div class="why-card reveal" data-reveal="up" data-delay="240">
         <span class="icon-square">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12c1.5-2 3-2 4 0s2.5 2 4 0"/></svg>
+          <img src="images/water.png" alt="Essential Minerals">
         </span>
         <h3>Eco-Friendly Packaging</h3>
         <p>Sustainable bottles for a better planet.</p>
@@ -288,222 +480,207 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
 <script>
-(function () {
-  "use strict";
+  (function () {
+    "use strict";
 
-  // ============================================================
-  // CONFIG — edit these to match your "animation" folder
-  // ============================================================
-  var FRAME_FOLDER = "animation/";      // folder path relative to this HTML file
-  var FRAME_PREFIX = "w-b-";            // text before the number, e.g. "w-b-" -> w-b-1.png
-  var FRAME_COUNT = 15;                 // total number of frames
-  var FRAME_PAD = 0;                    // 0 = no zero-padding (w-b-1, w-b-2, not w-b-01)
-  var FRAME_EXT = "png";                // file extension, no dot: "png", "jpg", "webp"
-  var FRAME_START_INDEX = 1;            // first frame number (1 -> w-b-1)
+    // ============================================================
+    // CONFIG — edit these to match your "animation" folder
+    // ============================================================
+    var FRAME_FOLDER = "animation/";     
+    var FRAME_PREFIX = "w-b-";            
+    var FRAME_COUNT = 15;                 
+    var FRAME_PAD = 0;                    
+    var FRAME_EXT = "png";                
+    var FRAME_START_INDEX = 1;            
 
-  var NAV_SELECTOR = "#navbar";         // CSS selector for your site's nav bar,
-                                         // e.g. "nav", "#site-header", ".navbar"
-                                         // set to null to disable nav-hiding entirely
-  // ============================================================
+    var NAV_SELECTOR = "#navbar";         
+    // ============================================================
 
-  function padNum(n, width) {
-    var s = String(n);
-    while (s.length < width) s = "0" + s;
-    return s;
-  }
+    function padNum(n, width) {
+      var s = String(n);
+      while (s.length < width) s = "0" + s;
+      return s;
+    }
 
-  function frameUrl(i) {
-    var num = padNum(FRAME_START_INDEX + i, FRAME_PAD);
-    return FRAME_FOLDER + FRAME_PREFIX + num + "." + FRAME_EXT;
-  }
+    function frameUrl(i) {
+      var num = padNum(FRAME_START_INDEX + i, FRAME_PAD);
+      return FRAME_FOLDER + FRAME_PREFIX + num + "." + FRAME_EXT;
+    }
 
-  var navEl = NAV_SELECTOR ? document.querySelector(NAV_SELECTOR) : null;
-  var navOriginalTransition = "";
+    var navEl = NAV_SELECTOR ? document.querySelector(NAV_SELECTOR) : null;
+    var navOriginalTransition = "";
 
-  function prepNavForToggle() {
-    if (!navEl) return;
-    navOriginalTransition = navEl.style.transition;
-    navEl.style.transition = "transform 0.35s ease, opacity 0.35s ease";
-  }
+    function prepNavForToggle() {
+      if (!navEl) return;
+      navOriginalTransition = navEl.style.transition;
+      navEl.style.transition = "transform 0.35s ease, opacity 0.35s ease";
+    }
 
-  function hideNav() {
-    if (!navEl) return;
-    navEl.style.transform = "translateY(-100%)";
-    navEl.style.opacity = "0";
-    navEl.style.pointerEvents = "none";
-  }
+    function hideNav() {
+      if (!navEl) return;
+      navEl.style.transform = "translateY(-100%)";
+      navEl.style.opacity = "0";
+      navEl.style.pointerEvents = "none";
+    }
 
-  function showNav() {
-    if (!navEl) return;
-    navEl.style.transform = "translateY(0)";
-    navEl.style.opacity = "1";
-    navEl.style.pointerEvents = "";
-  }
+    function showNav() {
+      if (!navEl) return;
+      navEl.style.transform = "translateY(0)";
+      navEl.style.opacity = "1";
+      navEl.style.pointerEvents = "";
+    }
 
-  gsap.registerPlugin(ScrollTrigger);
+    gsap.registerPlugin(ScrollTrigger);
 
-  var imgEl = document.getElementById("seq-img");
-  var loaderEl = document.getElementById("seq-loader");
-  var loaderFill = document.getElementById("seq-loader-fill");
-  var loaderText = document.getElementById("seq-loader-text");
-  var scrollHint = document.getElementById("seq-scroll-hint");
+    var imgEl = document.getElementById("seq-img");
+    var loaderEl = document.getElementById("seq-loader");
+    var loaderFill = document.getElementById("seq-loader-fill");
+    var loaderText = document.getElementById("seq-loader-text");
+    var scrollHint = document.getElementById("seq-scroll-hint");
 
-  var frameUrls = [];
-  for (var i = 0; i < FRAME_COUNT; i++) frameUrls.push(frameUrl(i));
+    var frameUrls = [];
+    for (var i = 0; i < FRAME_COUNT; i++) frameUrls.push(frameUrl(i));
 
-  var preloadedImages = new Array(FRAME_COUNT);
-  var loadedCount = 0;
-  var isReady = false;
-  var lastDrawnIndex = -1;
-  var loadFailed = false;
+    var preloadedImages = new Array(FRAME_COUNT);
+    var loadedCount = 0;
+    var isReady = false;
+    var lastDrawnIndex = -1;
+    var loadFailed = false;
 
-  var playhead = { frame: 0 };
+    var playhead = { frame: 0 };
 
-  function render() {
-    var idx = Math.max(0, Math.min(FRAME_COUNT - 1, Math.round(playhead.frame)));
-    if (idx === lastDrawnIndex) return;
-    lastDrawnIndex = idx;
-    imgEl.src = frameUrls[idx];
-  }
+    function render() {
+      var idx = Math.max(0, Math.min(FRAME_COUNT - 1, Math.round(playhead.frame)));
+      if (idx === lastDrawnIndex) return;
+      lastDrawnIndex = idx;
+      imgEl.src = frameUrls[idx];
+    }
 
-  function updateLoaderUI() {
-    var pct = Math.round((loadedCount / FRAME_COUNT) * 100);
-    loaderFill.style.width = pct + "%";
-    loaderText.textContent = "Loading " + pct + "%";
-  }
+    function updateLoaderUI() {
+      var pct = Math.round((loadedCount / FRAME_COUNT) * 100);
+      loaderFill.style.width = pct + "%";
+      loaderText.textContent = "Loading " + pct + "%";
+    }
 
-  function preloadFrames() {
-    return new Promise(function (resolve) {
-      var settledCount = 0;
-      for (var i = 0; i < FRAME_COUNT; i++) {
-        (function (i) {
-          var img = new Image();
-          img.onload = function () {
-            loadedCount++;
-            settledCount++;
-            updateLoaderUI();
-            if (settledCount === FRAME_COUNT) resolve();
-          };
-          img.onerror = function () {
-            settledCount++;
-            loadFailed = true;
-            console.error("Failed to load frame:", frameUrls[i]);
-            if (settledCount === FRAME_COUNT) resolve();
-          };
-          img.src = frameUrls[i];
-          preloadedImages[i] = img;
-        })(i);
-      }
-    });
-  }
+    function preloadFrames() {
+      return new Promise(function (resolve) {
+        var settledCount = 0;
+        for (var i = 0; i < FRAME_COUNT; i++) {
+          (function (i) {
+            var img = new Image();
+            img.onload = function () {
+              loadedCount++;
+              settledCount++;
+              updateLoaderUI();
+              if (settledCount === FRAME_COUNT) resolve();
+            };
+            img.onerror = function () {
+              settledCount++;
+              loadFailed = true;
+              console.error("Failed to load frame:", frameUrls[i]);
+              if (settledCount === FRAME_COUNT) resolve();
+            };
+            img.src = frameUrls[i];
+            preloadedImages[i] = img;
+          })(i);
+        }
+      });
+    }
 
-  function hideLoader() {
-    loaderEl.classList.add("is-hidden");
-    setTimeout(function () {
-      loaderEl.style.display = "none";
-    }, 500);
-  }
+    function hideLoader() {
+      loaderEl.classList.add("is-hidden");
+      setTimeout(function () {
+        loaderEl.style.display = "none";
+      }, 500);
+    }
 
-  function showLoadErrorFallback() {
-    // Graceful fallback: if frames genuinely fail to load (wrong path,
-    // missing folder, etc.), stop showing a spinner forever and tell
-    // the user plainly instead of a silently broken section.
-    loaderText.textContent = "Couldn't load animation frames — check the animation/ folder path.";
-    loaderFill.style.background = "#e5484d";
-  }
+    function showLoadErrorFallback() {
+      // Graceful fallback: if frames genuinely fail to load (wrong path,
+      // missing folder, etc.), stop showing a spinner forever and tell
+      // the user plainly instead of a silently broken section.
+      loaderText.textContent = "Couldn't load animation frames — check the animation/ folder path.";
+      loaderFill.style.background = "#e5484d";
+    }
 
-  function fadeScrollHintOnFirstScroll() {
-    ScrollTrigger.create({
-      trigger: "#seq-section",
-      start: "top top",
-      onUpdate: function (self) {
-        scrollHint.style.opacity = self.progress > 0.02 ? "0" : "1";
-      }
-    });
-  }
-
-  function initScrollAnimation() {
-    playhead.frame = 0;
-    render();
-
-    prepNavForToggle();
-
-    gsap.to(playhead, {
-      frame: FRAME_COUNT - 1,
-      ease: "none",
-      scrollTrigger: {
+    function fadeScrollHintOnFirstScroll() {
+      ScrollTrigger.create({
         trigger: "#seq-section",
         start: "top top",
-        end: "bottom bottom",
-        scrub: 0.35,
-        pin: "#seq-stage",
-        pinSpacing: false,
-        anticipatePin: 1,
-        invalidateOnRefresh: true,
-        onEnter: hideNav,       // scrolling down into the section
-        onEnterBack: hideNav,   // scrolling up back into the section
-        onLeave: showNav,       // scrolling down past the section
-        onLeaveBack: showNav    // scrolling up above the section
-      },
-      onUpdate: render
+        onUpdate: function (self) {
+          scrollHint.style.opacity = self.progress > 0.02 ? "0" : "1";
+        }
+      });
+    }
+
+    function initScrollAnimation() {
+      playhead.frame = 0;
+      render();
+
+      prepNavForToggle();
+
+      gsap.to(playhead, {
+        frame: FRAME_COUNT - 1,
+        ease: "none",
+        scrollTrigger: {
+          trigger: "#seq-section",
+          start: "top top",
+          end: "bottom bottom",
+          scrub: 0.35,
+          pin: "#seq-stage",
+          pinSpacing: false,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+          onEnter: hideNav,       // scrolling down into the section
+          onEnterBack: hideNav,   // scrolling up back into the section
+          onLeave: showNav,       // scrolling down past the section
+          onLeaveBack: showNav    // scrolling up above the section
+        },
+        onUpdate: render
+      });
+
+      fadeScrollHintOnFirstScroll();
+      ScrollTrigger.refresh();
+    }
+
+    // Show whichever frame has loaded most recently while still loading,
+    // so the section doesn't look totally static during preload.
+    var pollId = setInterval(function () {
+      if (!isReady && loadedCount > 0) {
+        var previewIdx = Math.min(loadedCount - 1, FRAME_COUNT - 1);
+        if (preloadedImages[previewIdx] && preloadedImages[previewIdx].complete) {
+          imgEl.src = frameUrls[previewIdx];
+        }
+      }
+    }, 150);
+
+    preloadFrames().then(function () {
+      isReady = true;
+      clearInterval(pollId);
+
+      if (loadFailed && loadedCount === 0) {
+        showLoadErrorFallback();
+        return; // don't init scroll animation with no frames
+      }
+
+      hideLoader();
+      initScrollAnimation();
     });
 
-    fadeScrollHintOnFirstScroll();
-    ScrollTrigger.refresh();
-  }
+    setTimeout(function () {
+      if (!isReady) {
+        loaderText.textContent = "Still loading… (" +
+          Math.round((loadedCount / FRAME_COUNT) * 100) + "%)";
+        }
+      }, 8000);
 
-  // Show whichever frame has loaded most recently while still loading,
-  // so the section doesn't look totally static during preload.
-  var pollId = setInterval(function () {
-    if (!isReady && loadedCount > 0) {
-      var previewIdx = Math.min(loadedCount - 1, FRAME_COUNT - 1);
-      if (preloadedImages[previewIdx] && preloadedImages[previewIdx].complete) {
-        imgEl.src = frameUrls[previewIdx];
-      }
-    }
-  }, 150);
+      window.addEventListener("resize", function () {
+        ScrollTrigger.refresh();
+      });
 
-  preloadFrames().then(function () {
-    isReady = true;
-    clearInterval(pollId);
-
-    if (loadFailed && loadedCount === 0) {
-      showLoadErrorFallback();
-      return; // don't init scroll animation with no frames
-    }
-
-    hideLoader();
-    initScrollAnimation();
-  });
-
-  setTimeout(function () {
-    if (!isReady) {
-      loaderText.textContent = "Still loading… (" +
-        Math.round((loadedCount / FRAME_COUNT) * 100) + "%)";
-    }
-  }, 8000);
-
-  window.addEventListener("resize", function () {
-    ScrollTrigger.refresh();
-  });
-
-})();
+    })();
 </script>
 
 
-
-
-<!-- ===== LIFESTYLE ===== -->
-<!-- <section class="lifestyle">
-  <div class="lifestyle-bg" style="background-image:url('images/lifestyle-bg.jpg')"></div>
-  <div class="lifestyle-overlay"></div>
-  <div class="container lifestyle-inner">
-    <div class="lifestyle-copy reveal" data-reveal="left">
-      <h2>Hydration for<br>Every Lifestyle</h2>
-      <p>From workout sessions to boardrooms, RIVR keeps you clear, focused, and refreshed.</p>
-    </div>
-  </div>
-</section> -->
 
 <!-- ===== TESTIMONIALS ===== -->
 <section class="testimonials">
@@ -530,7 +707,7 @@
       <div class="testimonial-author">
         <img src="images/avatar-1.png" alt="Kyil Rodriguez">
         <div>
-          <h4>Kyil Rodriguez</h4>
+          <h4> Adil Shabab</h4>
           <span>Nutritionist</span>
         </div>
       </div>
@@ -546,7 +723,7 @@
       <div class="testimonial-author">
         <img src="images/avatar-1.png" alt="Amara Chen">
         <div>
-          <h4>Amara Chen</h4>
+          <h4>Khaja Shaik</h4>
           <span>Fitness Coach</span>
         </div>
       </div>
@@ -562,7 +739,7 @@
       <div class="testimonial-author">
         <img src="images/avatar-1.png" alt="Daniel Osei">
         <div>
-          <h4>Daniel Osei</h4>
+          <h4>Mohan Kumar</h4>
           <span>Wellness Blogger</span>
         </div>
       </div>
@@ -616,7 +793,7 @@
       <div class="testimonial-author">
         <img src="images/avatar-1.png" alt="Sophia Williams">
         <div>
-          <h4>Sophia Williams</h4>
+          <h4>Sandeep Khanna</h4>
           <span>Wellness Coach</span>
         </div>
       </div>
@@ -638,7 +815,7 @@
       <div class="testimonial-author">
         <img src="images/avatar-1.png" alt="Rahul Verma">
         <div>
-          <h4>Rahul Verma</h4>
+          <h4>Anushka Patel</h4>
           <span>Entrepreneur</span>
         </div>
       </div>
@@ -654,7 +831,7 @@
       <div class="testimonial-author">
         <img src="images/avatar-1.png" alt="Emma Davis">
         <div>
-          <h4>Emma Davis</h4>
+          <h4>Hari Krishna</h4>
           <span>Nutrition Coach</span>
         </div>
       </div>
@@ -706,15 +883,9 @@
       <img src="images/logo-white.png" alt="RIVR logo">
       <p>Purely Alkaline.<br>Perfectly Balanced.</p>
       <div class="social-icons">
-        <a href="https://www.facebook.com/RIVR" aria-label="Facebook">
-          <svg viewBox="0 0 24 24"><path d="M14 9h3V6h-3c-2 0-3.5 1.5-3.5 3.5V11H8v3h2.5v7h3v-7H16l.5-3h-3V9.5c0-.3.2-.5.5-.5Z"/></svg>
-        </a>
-        <a href="https://www.instagram.com/RIVR" aria-label="Instagram">
-          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
-        </a>
-        <a href="https://www.twitter.com/RIVR" aria-label="Twitter">
-          <svg viewBox="0 0 24 24"><path d="M22 5.9c-.7.3-1.5.6-2.3.7.8-.5 1.5-1.3 1.8-2.3-.8.5-1.7.8-2.6 1a4 4 0 0 0-6.9 3.6A11.5 11.5 0 0 1 3.7 4.6a4 4 0 0 0 1.2 5.4c-.6 0-1.2-.2-1.7-.5v.1a4 4 0 0 0 3.2 4 4 4 0 0 1-1.8.1 4 4 0 0 0 3.8 2.8A8 8 0 0 1 2 18.6a11.4 11.4 0 0 0 6.3 1.9c7.5 0 11.7-6.4 11.7-11.9v-.5c.8-.6 1.5-1.3 2-2.2Z"/></svg>
-        </a>
+        <a href="#" class="social-icon" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.2c2.7 0 3 0 4.1.06 1.1.05 1.8.22 2.4.46.6.24 1.1.56 1.6 1.06.5.5.82 1 1.06 1.6.24.6.4 1.3.46 2.4.06 1.1.06 1.4.06 4.1s0 3-.06 4.1c-.05 1.1-.22 1.8-.46 2.4a4.3 4.3 0 0 1-1.06 1.6 4.3 4.3 0 0 1-1.6 1.06c-.6.24-1.3.4-2.4.46-1.1.06-1.4.06-4.1.06s-3 0-4.1-.06c-1.1-.05-1.8-.22-2.4-.46a4.3 4.3 0 0 1-1.6-1.06 4.3 4.3 0 0 1-1.06-1.6c-.24-.6-.4-1.3-.46-2.4C2.2 15 2.2 14.7 2.2 12s0-3 .06-4.1c.05-1.1.22-1.8.46-2.4.24-.6.56-1.1 1.06-1.6a4.3 4.3 0 0 1 1.6-1.06c.6-.24 1.3-.4 2.4-.46C9 2.2 9.3 2.2 12 2.2zm0 1.8c-2.65 0-2.96 0-4 .06-.96.04-1.48.2-1.83.34-.46.18-.79.4-1.13.75-.35.34-.57.67-.75 1.13-.14.35-.3.87-.34 1.83-.05 1.04-.06 1.35-.06 4s0 2.96.06 4c.04.96.2 1.48.34 1.83.18.46.4.79.75 1.13.34.35.67.57 1.13.75.35.14.87.3 1.83.34 1.04.05 1.35.06 4 .06s2.96 0 4-.06c.96-.04 1.48-.2 1.83-.34.46-.18.79-.4 1.13-.75.35-.34.57-.67.75-1.13.14-.35.3-.87.34-1.83.05-1.04.06-1.35.06-4s0-2.96-.06-4c-.04-.96-.2-1.48-.34-1.83a2.9 2.9 0 0 0-.75-1.13 2.9 2.9 0 0 0-1.13-.75c-.35-.14-.87-.3-1.83-.34-1.04-.05-1.35-.06-4-.06zm0 3.5a4.5 4.5 0 1 1 0 9 4.5 4.5 0 0 1 0-9zm0 1.8a2.7 2.7 0 1 0 0 5.4 2.7 2.7 0 0 0 0-5.4zm5.7-2a1.05 1.05 0 1 1-2.1 0 1.05 1.05 0 0 1 2.1 0z"/></svg></a>
+        <a href="#" class="social-icon" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1V8c0-.9.25-1.5 1.55-1.5H17V3.7C16.6 3.65 15.4 3.5 14 3.5c-2.7 0-4.6 1.65-4.6 4.7v2.7H6.7V14H9.4v8h4.1z"/></svg></a>
+        <a href="#" class="social-icon" aria-label="Youtube"><svg viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4z"/></svg></a>
       </div>
     </div>
 
@@ -744,7 +915,7 @@
   </div>
 
   <div class="footer-bottom">
-    <p>&copy; <span id="year"></span> RIVR. All rights reserved.</p>
+    <p>&copy; <span id="year"></span> RIVR. All rights reserved. and developed by thinkB.</p>
   </div>
 </footer>
 

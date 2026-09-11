@@ -301,16 +301,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
   revealEls.forEach(el => revealObserver.observe(el));
-
-  // Add to Cart micro-interaction
-  document.querySelectorAll('.product-card .btn-primary').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const original = btn.innerHTML;
-      btn.innerHTML = '<svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2"><path d="M20 6 9 17l-5-5"/></svg> Added!';
-      btn.disabled = true;
-      setTimeout(() => { btn.innerHTML = original; btn.disabled = false; }, 1600);
-    });
-  });
 });
 
 
@@ -574,3 +564,170 @@ document.addEventListener('DOMContentLoaded', () => {
     nlStatus.classList.remove('show', 'err');
   });
 });
+
+
+// for blog detail page
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const navbar = document.getElementById('navbar');
+  const backToTop = document.getElementById('backToTop');
+  const onScroll = () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 20);
+    backToTop.classList.toggle('show', window.scrollY > 500);
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  const menuToggle = document.getElementById('menuToggle');
+  const navLinks = document.getElementById('navLinks');
+  menuToggle.addEventListener('click', () => {
+    menuToggle.classList.toggle('open');
+    navLinks.classList.toggle('open');
+  });
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      menuToggle.classList.remove('open');
+      navLinks.classList.remove('open');
+    });
+  });
+
+  const revealEls = document.querySelectorAll('.reveal');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -60px 0px' });
+  revealEls.forEach(el => revealObserver.observe(el));
+
+  /* ---- SHARE BUTTONS (toast feedback) ---- */
+  const toast = document.getElementById('toast');
+  let toastTimer;
+  function showToast(msg) {
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
+  }
+
+  document.getElementById('topShareBtn').addEventListener('click', () => {
+    showToast('Link copied to clipboard!');
+  });
+  document.querySelectorAll('.share-link').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      showToast(`Sharing to ${link.dataset.network}...`);
+    });
+  });
+
+  /* ---- SIDEBAR SEARCH (filters recent posts list by title) ---- */
+  const sidebarSearch = document.getElementById('sidebarSearch');
+  const recentItems = document.querySelectorAll('.recent-list li');
+  sidebarSearch.addEventListener('input', () => {
+    const q = sidebarSearch.value.trim().toLowerCase();
+    recentItems.forEach(li => {
+      const title = li.querySelector('a').textContent.toLowerCase();
+      li.style.display = !q || title.includes(q) ? 'flex' : 'none';
+    });
+  });
+
+  /* ---- CATEGORY CLICK (visual active state) ---- */
+  document.querySelectorAll('.cat-list li').forEach(li => {
+    li.addEventListener('click', () => {
+      document.querySelectorAll('.cat-list li').forEach(el => el.style.fontWeight = '');
+      li.querySelector('.name').style.color = 'var(--blue)';
+    });
+  });
+});
+
+
+
+// This JS does NOT contain any image paths.
+// All images/text live in index.html inside .qt-slide blocks.
+// JS just switches which slide has the "active" class,
+// and copies that slide's title/description into the footer textbox.
+
+const slides = document.querySelectorAll(".qt-slide");
+const textbox = document.getElementById("qtTextbox");
+const prevBtn = document.getElementById("qtPrev");
+const nextBtn = document.getElementById("qtNext");
+
+let currentIndex = 0;
+
+function renderTextbox(index) {
+  const slide = slides[index];
+  const title = slide.querySelector(".qt-title").innerHTML;
+  const desc = slide.querySelector(".qt-desc").innerHTML;
+
+  textbox.style.opacity = "0";
+  setTimeout(() => {
+    textbox.innerHTML = `
+      <h2 class="qt-title">${title}</h2>
+      <p class="qt-desc">${desc}</p>
+    `;
+    textbox.style.opacity = "1";
+  }, 200);
+}
+
+function showSlide(index) {
+  slides.forEach((slide, i) => {
+    slide.classList.toggle("active", i === index);
+  });
+  renderTextbox(index);
+  // Bottle is untouched here — it always stays fixed in place.
+}
+
+function goNext() {
+  currentIndex = (currentIndex + 1) % slides.length;
+  showSlide(currentIndex);
+}
+
+function goPrev() {
+  currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+  showSlide(currentIndex);
+}
+
+nextBtn.addEventListener("click", goNext);
+prevBtn.addEventListener("click", goPrev);
+
+// Initialize textbox with the first slide's content on page load
+renderTextbox(currentIndex);
+
+
+
+
+// founder slider section code
+/* ===== FOUNDER AUTO SLIDER ===== */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  const slides = document.querySelectorAll(".founder-slide");
+
+  let currentSlide = 0;
+
+  function showNextFounder() {
+
+    // Remove active class from current founder
+    slides[currentSlide].classList.remove("active");
+
+    // Move to next founder
+    currentSlide++;
+
+    // Go back to first founder after the last one
+    if (currentSlide >= slides.length) {
+      currentSlide = 0;
+    }
+
+    // Show next founder
+    slides[currentSlide].classList.add("active");
+  }
+
+  // Change founder every 5 seconds
+  setInterval(showNextFounder, 5000);
+
+});
+
