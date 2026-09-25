@@ -1427,7 +1427,11 @@ ul{ list-style: none; margin: 0; padding: 0; }
 
 /* for why rivr */
 /* HERO */
-.why-hero{position:relative;background:linear-gradient(180deg,var(--sky) 0%,var(--sky-2) 100%);padding:80px 0;overflow:hidden}
+.why-hero{
+  position:relative;
+  background:#c5deee;
+  padding:80px 0;
+  overflow:hidden}
 .why-hero-inner{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
 .eyebrow-rule{width:60px;height:3px;background:var(--blue);margin:10px 0 22px;border-radius:2px}
 .why-hero h1{font-size:clamp(2.2rem,4.4vw,3.1rem)}
