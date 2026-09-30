@@ -731,3 +731,95 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
+
+
+
+
+const contactForm = document.getElementById("contactForm");
+const sendBtn = document.getElementById("sendBtn");
+const formStatus = document.getElementById("formStatus");
+
+contactForm.addEventListener("submit", async function (event) {
+  event.preventDefault();
+
+  // Keep your custom validation UI
+  const name = document.getElementById("name");
+  const email = document.getElementById("email");
+  const subject = document.getElementById("subject");
+  const message = document.getElementById("message");
+
+  const fields = [
+    { input: name, valid: name.value.trim() !== "" },
+    {
+      input: email,
+      valid: email.value.trim() !== "" && email.validity.valid
+    },
+    { input: subject, valid: subject.value !== "" },
+    { input: message, valid: message.value.trim() !== "" }
+  ];
+
+  // Hide old validation messages
+  contactForm.querySelectorAll(".error-msg").forEach(function (error) {
+    error.style.display = "none";
+  });
+
+  let isValid = true;
+
+  fields.forEach(function (field) {
+    if (!field.valid) {
+      isValid = false;
+      const wrapper = field.input.closest(".field");
+      const error = wrapper.nextElementSibling;
+
+      if (error && error.classList.contains("error-msg")) {
+        error.style.display = "block";
+      }
+    }
+  });
+
+  if (!isValid) {
+    return;
+  }
+
+  sendBtn.disabled = true;
+  sendBtn.textContent = "Sending...";
+  formStatus.style.display = "none";
+
+  try {
+    const response = await fetch(contactForm.action, {
+      method: "POST",
+      body: new FormData(contactForm),
+      headers: {
+        Accept: "application/json"
+      }
+    });
+
+    if (response.ok) {
+      contactForm.reset();
+      formStatus.style.display = "flex";
+      formStatus.querySelector("span").textContent =
+        "Thanks! Your message has been sent — we'll be in touch soon.";
+    } else {
+      let errorMessage = "Unable to send your message. Please try again.";
+
+      try {
+        const result = await response.json();
+        if (result.errors && result.errors.length) {
+          errorMessage = result.errors.map(function (error) {
+            return error.message;
+          }).join(" ");
+        }
+      } catch (_) {}
+
+      formStatus.style.display = "block";
+      formStatus.textContent = errorMessage;
+    }
+  } catch (error) {
+    formStatus.style.display = "block";
+    formStatus.textContent =
+      "Network error. Please check your connection and try again.";
+  } finally {
+    sendBtn.disabled = false;
+    sendBtn.textContent = "Send Message";
+  }
+});
