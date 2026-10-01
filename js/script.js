@@ -488,6 +488,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const cards = Array.from(document.querySelectorAll('.blog-card'));
   const tabs = document.querySelectorAll('.filter-tab');
   const searchInput = document.getElementById('searchInput');
+  console.log(searchInput);
   const noResults = document.getElementById('noResults');
   let activeFilter = 'all';
 
