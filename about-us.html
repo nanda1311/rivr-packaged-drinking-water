@@ -7,6 +7,79 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
+<style>
+  /* this is css for the process section for mobile version only */
+@media (max-width: 768px) {
+  .qt-section {
+    padding: 32px 16px;
+  }
+
+  .qt-card {
+    display: flex;
+    flex-direction: column;
+    aspect-ratio: auto;
+    height: auto;
+    overflow: hidden;
+    border-radius: 18px;
+  }
+
+  .qt-slide {
+    inset: 0;
+    position: absolute;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+  }
+
+  .qt-slide.active {
+    position: relative;
+    inset: auto;
+    flex: 0 0 auto;
+  }
+
+  .qt-facets {
+    bottom: auto;
+    height: 0;
+    padding-bottom: 75%;
+  }
+
+  .qt-bottle-wrap {
+    top: 0;
+    left: 50%;
+    height: 72%;
+    transform: translate(-50%, 8%);
+  }
+
+  .qt-footer {
+    position: relative;
+    inset: auto;
+    z-index: 6;
+    gap: 10px;
+    padding: 16px 12px;
+    background: #0a1a1f;
+  }
+
+  .qt-textbox {
+    padding: 10px 4px;
+    width: auto;
+    flex: 1;
+  }
+
+  .qt-textbox .qt-title {
+    font-size: 20px;
+  }
+
+  .qt-textbox .qt-desc {
+    color: #d0d7d9;
+    font-size: 13px;
+  }
+
+  .qt-arrow {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+}
+</style>
 
 </head>
 <body>
@@ -37,7 +110,6 @@
   <div class="container why-hero-inner">
     <div class="reveal" data-reveal="left">
       <h1>About RIVR</h1>
-      <div class="eyebrow-rule"></div>
       <h2 class="tagline">Purity is Our Promise.<br>Hydration is Our Purpose.</h2>
       <p class="lead">RIVR is premium alkaline water crafted to support a healthier, more balanced lifestyle.</p>
       <div class="hero-quick-icons">
@@ -170,12 +242,6 @@
       </p>
     </div>
     <div class="qt-card">
- 
-      <!-- ===================== BACKGROUND SLIDES ===================== -->
-      <!-- Each slide has its own image + title + description, all defined here in HTML.   -->
-      <!-- Only ONE should have the "active" class at a time — JS just toggles this class. -->
-      <!-- Add/remove <div class="qt-slide">...</div> blocks to add/remove slides.          -->
- 
       <div class="qt-slide active" data-index="0">
         <img src="images/process-bg-1.png" alt="" class="qt-bg-img">
         <div class="qt-overlay"></div>

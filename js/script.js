@@ -733,93 +733,454 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
+document.addEventListener("DOMContentLoaded", function () {
+
+  const form = document.getElementById("contactForm");
+  const sendBtn = document.getElementById("sendBtn");
+  const formStatus = document.getElementById("formStatus");
+
+  if (!form) return;
+
+  const nameInput = document.getElementById("name");
+  const emailInput = document.getElementById("email");
+  const phoneInput = document.getElementById("phone");
+  const subjectInput = document.getElementById("subject");
+  const messageInput = document.getElementById("message");
+
+  const errorMessages = {
+    name: document.querySelector('[data-field="name"] + .error-msg'),
+    email: document.querySelector('[data-field="email"] + .error-msg'),
+    phone: document.querySelector('[data-field="phone"] + .error-msg'),
+    subject: document.querySelector('[data-field="subject"] + .error-msg'),
+    message: document.querySelector('[data-field="message"] + .error-msg')
+  };
 
 
-const contactForm = document.getElementById("contactForm");
-const sendBtn = document.getElementById("sendBtn");
-const formStatus = document.getElementById("formStatus");
-
-contactForm.addEventListener("submit", async function (event) {
-  event.preventDefault();
-
-  // Keep your custom validation UI
-  const name = document.getElementById("name");
-  const email = document.getElementById("email");
-  const subject = document.getElementById("subject");
-  const message = document.getElementById("message");
-
-  const fields = [
-    { input: name, valid: name.value.trim() !== "" },
-    {
-      input: email,
-      valid: email.value.trim() !== "" && email.validity.valid
-    },
-    { input: subject, valid: subject.value !== "" },
-    { input: message, valid: message.value.trim() !== "" }
-  ];
-
-  // Hide old validation messages
-  contactForm.querySelectorAll(".error-msg").forEach(function (error) {
-    error.style.display = "none";
+  Object.values(errorMessages).forEach(function (error) {
+    if (error) {
+      error.style.display = "none";
+    }
   });
 
-  let isValid = true;
+  function showError(field, message) {
 
-  fields.forEach(function (field) {
-    if (!field.valid) {
+    const fieldContainer = document.querySelector(
+      '[data-field="' + field + '"]'
+    );
+
+    const error = errorMessages[field];
+
+    if (fieldContainer) {
+      fieldContainer.classList.add("error");
+    }
+
+    if (error) {
+      error.textContent = message;
+      error.style.display = "block";
+    }
+  }
+
+
+  function hideError(field) {
+
+    const fieldContainer = document.querySelector(
+      '[data-field="' + field + '"]'
+    );
+
+    const error = errorMessages[field];
+
+    if (fieldContainer) {
+      fieldContainer.classList.remove("error");
+    }
+
+    if (error) {
+      error.style.display = "none";
+    }
+  }
+
+  function isValidEmail(email) {
+
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+  }
+
+
+
+  function validateForm() {
+
+    let isValid = true;
+
+
+    // Name
+    if (!nameInput.value.trim()) {
+
+      showError(
+        "name",
+        "Please enter your name."
+      );
+
       isValid = false;
-      const wrapper = field.input.closest(".field");
-      const error = wrapper.nextElementSibling;
 
-      if (error && error.classList.contains("error-msg")) {
-        error.style.display = "block";
-      }
+    } else {
+
+      hideError("name");
+
     }
+
+
+    // Email
+    if (!emailInput.value.trim()) {
+
+      showError(
+        "email",
+        "Please enter your email."
+      );
+
+      isValid = false;
+
+    } else if (!isValidEmail(emailInput.value.trim())) {
+
+      showError(
+        "email",
+        "Please enter a valid email."
+      );
+
+      isValid = false;
+
+    } else {
+
+      hideError("email");
+
+    }
+
+
+    // Phone - optional
+    if (phoneInput.value.trim()) {
+
+      const phone = phoneInput.value.trim();
+
+      if (!/^[0-9+\-\s()]{7,20}$/.test(phone)) {
+
+        showError(
+          "phone",
+          "Please enter a valid phone number."
+        );
+
+        isValid = false;
+
+      } else {
+
+        hideError("phone");
+
+      }
+
+    } else {
+
+      hideError("phone");
+
+    }
+
+
+    // Subject
+    if (!subjectInput.value) {
+
+      showError(
+        "subject",
+        "Please choose a subject."
+      );
+
+      isValid = false;
+
+    } else {
+
+      hideError("subject");
+
+    }
+
+
+    // Message
+    if (!messageInput.value.trim()) {
+
+      showError(
+        "message",
+        "Please enter a message."
+      );
+
+      isValid = false;
+
+    } else {
+
+      hideError("message");
+
+    }
+
+
+    return isValid;
+  }
+
+
+  function hideSuccessMessage() {
+
+    if (formStatus) {
+
+      formStatus.classList.remove("show");
+
+      formStatus.style.display = "none";
+
+    }
+
+  }
+
+
+
+  function showSuccessMessage() {
+
+    if (formStatus) {
+
+      formStatus.style.display = "flex";
+
+      // Small delay so CSS transition can work
+      setTimeout(function () {
+        formStatus.classList.add("show");
+      }, 10);
+
+    }
+
+  }
+
+
+  nameInput.addEventListener("input", function () {
+
+    if (nameInput.value.trim()) {
+      hideError("name");
+    }
+
   });
 
-  if (!isValid) {
-    return;
-  }
 
-  sendBtn.disabled = true;
-  sendBtn.textContent = "Sending...";
-  formStatus.style.display = "none";
+  emailInput.addEventListener("input", function () {
 
-  try {
-    const response = await fetch(contactForm.action, {
-      method: "POST",
-      body: new FormData(contactForm),
-      headers: {
-        Accept: "application/json"
-      }
-    });
-
-    if (response.ok) {
-      contactForm.reset();
-      formStatus.style.display = "flex";
-      formStatus.querySelector("span").textContent =
-        "Thanks! Your message has been sent — we'll be in touch soon.";
-    } else {
-      let errorMessage = "Unable to send your message. Please try again.";
-
-      try {
-        const result = await response.json();
-        if (result.errors && result.errors.length) {
-          errorMessage = result.errors.map(function (error) {
-            return error.message;
-          }).join(" ");
-        }
-      } catch (_) {}
-
-      formStatus.style.display = "block";
-      formStatus.textContent = errorMessage;
+    if (
+      emailInput.value.trim() &&
+      isValidEmail(emailInput.value.trim())
+    ) {
+      hideError("email");
     }
-  } catch (error) {
-    formStatus.style.display = "block";
-    formStatus.textContent =
-      "Network error. Please check your connection and try again.";
-  } finally {
-    sendBtn.disabled = false;
-    sendBtn.textContent = "Send Message";
-  }
+
+  });
+
+
+  phoneInput.addEventListener("input", function () {
+
+    if (!phoneInput.value.trim()) {
+
+      hideError("phone");
+
+    } else if (
+      /^[0-9+\-\s()]{7,20}$/.test(phoneInput.value.trim())
+    ) {
+
+      hideError("phone");
+
+    }
+
+  });
+
+
+  subjectInput.addEventListener("change", function () {
+
+    if (subjectInput.value) {
+      hideError("subject");
+    }
+
+  });
+
+
+  messageInput.addEventListener("input", function () {
+
+    if (messageInput.value.trim()) {
+      hideError("message");
+    }
+
+  });
+
+
+  form.addEventListener("submit", async function (event) {
+
+    event.preventDefault();
+
+
+    // Hide previous success message
+    hideSuccessMessage();
+
+
+    // Validate fields
+    if (!validateForm()) {
+
+      // Focus first invalid field
+      const firstError = form.querySelector(".field.error input, .field.error select, .field.error textarea");
+
+      if (firstError) {
+        firstError.focus();
+      }
+
+      return;
+
+    }
+
+
+    /*
+     * -------------------------------------------------------
+     * DISABLE BUTTON WHILE SUBMITTING
+     * -------------------------------------------------------
+     */
+
+    const originalButtonText = sendBtn.innerHTML;
+
+    sendBtn.disabled = true;
+    sendBtn.innerHTML = "Sending...";
+
+    sendBtn.classList.add("loading");
+
+
+    const formData = new FormData(form);
+
+
+    try {
+
+      const response = await fetch(
+        "https://formspree.io/f/mdekbrey",
+        {
+          method: "POST",
+          body: formData,
+          headers: {
+            "Accept": "application/json"
+          }
+        }
+      );
+
+
+
+      if (response.ok) {
+
+        // Reset the form
+        form.reset();
+
+
+        // Remove any remaining error states
+        Object.keys(errorMessages).forEach(function (field) {
+          hideError(field);
+        });
+
+
+        // Show success message
+        showSuccessMessage();
+
+
+        // Restore button
+        sendBtn.disabled = false;
+        sendBtn.innerHTML = originalButtonText;
+        sendBtn.classList.remove("loading");
+
+
+        /*
+         * Automatically hide success message after 6 seconds
+         */
+
+        setTimeout(function () {
+
+          if (formStatus) {
+
+            formStatus.classList.remove("show");
+
+            setTimeout(function () {
+
+              formStatus.style.display = "none";
+
+            }, 300);
+
+          }
+
+        }, 6000);
+
+
+      }
+
+
+      /*
+       * -----------------------------------------------------
+       * FORMSPREE ERROR
+       * -----------------------------------------------------
+       */
+
+      else {
+
+        let errorMessage =
+          "Something went wrong. Please try again.";
+
+        try {
+
+          const data = await response.json();
+
+          if (
+            data &&
+            data.errors &&
+            data.errors.length
+          ) {
+
+            errorMessage = data.errors
+              .map(function (error) {
+                return error.message;
+              })
+              .join(" ");
+
+          }
+
+        } catch (error) {
+
+          // Ignore JSON parsing error
+
+        }
+
+
+        alert(errorMessage);
+
+
+        sendBtn.disabled = false;
+        sendBtn.innerHTML = originalButtonText;
+        sendBtn.classList.remove("loading");
+
+      }
+
+
+    }
+
+
+    /*
+     * -------------------------------------------------------
+     * NETWORK ERROR
+     * -------------------------------------------------------
+     */
+
+    catch (error) {
+
+      console.error(
+        "Formspree submission error:",
+        error
+      );
+
+
+      alert(
+        "Unable to send your message right now. Please check your internet connection and try again."
+      );
+
+
+      sendBtn.disabled = false;
+      sendBtn.innerHTML = originalButtonText;
+      sendBtn.classList.remove("loading");
+
+    }
+
+  });
+
 });

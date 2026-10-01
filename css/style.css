@@ -911,7 +911,6 @@ ul{ list-style: none; margin: 0; padding: 0; }
 /* HERO */
 .about-hero{position:relative;background:linear-gradient(180deg,var(--sky) 0%,var(--sky-2) 100%);padding:80px 0 70px;overflow:hidden}
 .about-hero-inner{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
-.eyebrow-rule{width:60px;height:3px;background:var(--blue);margin:6px 0 22px;border-radius:2px}
 .about-hero h1{font-size:clamp(2.2rem,4.4vw,3.1rem)}
 .about-hero h2.tagline{font-size:clamp(1.3rem,2.4vw,1.7rem);color:var(--navy);font-weight:600;margin-bottom:.6em}
 .about-hero p.lead{max-width:44ch;font-size:1.02rem}
@@ -1290,7 +1289,7 @@ ul{ list-style: none; margin: 0; padding: 0; }
   .hero-quick-icons{justify-content:center}
   .hero-media-about{order:-1}
   .founder-inner{grid-template-columns:1fr}
-  .founder-media img{aspect-ratio:16/9}
+  .founder-media img{aspect-ratio:8/9}
   .story-inner{grid-template-columns:1fr}
   .why-grid{grid-template-columns:repeat(2,1fr)}
   .process-track{flex-wrap:wrap;justify-content:center;row-gap:30px}
@@ -1331,7 +1330,6 @@ ul{ list-style: none; margin: 0; padding: 0; }
 /* HERO */
 .contact-hero{position:relative;background:linear-gradient(180deg,var(--sky) 0%,var(--sky-2) 100%);padding:80px 0;overflow:hidden}
 .contact-hero-inner{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
-.eyebrow-rule{width:60px;height:3px;background:var(--blue);margin:10px 0 22px;border-radius:2px}
 .contact-hero h1{font-size:clamp(2.2rem,4.4vw,3.1rem)}
 .contact-hero h2.tagline{font-size:clamp(1.2rem,2.2vw,1.5rem);color:var(--navy);font-weight:600;margin-bottom:.6em}
 .contact-hero p.lead{max-width:46ch;font-size:1.02rem}
@@ -1520,7 +1518,6 @@ ul{ list-style: none; margin: 0; padding: 0; }
 /* HERO */
 .blog-hero{position:relative;background:linear-gradient(180deg,var(--sky) 0%,var(--sky-2) 100%);padding:80px 0;overflow:hidden}
 .blog-hero-inner{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
-.eyebrow-rule{width:60px;height:3px;background:var(--blue);margin:10px 0 22px;border-radius:2px}
 .blog-hero h1{font-size:clamp(2.2rem,4.4vw,3.1rem)}
 .blog-hero p.lead{max-width:46ch;font-size:1.02rem}
 .search-box{position:relative;max-width:460px;margin-top:8px}
